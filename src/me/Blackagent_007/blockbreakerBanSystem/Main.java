@@ -4,6 +4,10 @@ package me.Blackagent_007.blockbreakerBanSystem;
     Hier geht´s weiter im Video!!!!!!!!!!!!!!!!!!!!!!!!!
         http://youtu.be/tXzfdqJ2k4Y?t=15m26s   !!
 
+        ===================================
+        ----- Mögliche Fehlerstellen: -----
+        Aktuell keine
+
  */
 import me.Blackagent_007.blockbreakerBanSystem.MySQL.MySQL;
 import me.Blackagent_007.blockbreakerBanSystem.util.BanManager;
@@ -26,10 +30,9 @@ public class Main extends JavaPlugin{
         MySQL.createTable();
         Bukkit.getConsoleSender().sendMessage(prefix + "Plugin aktiviert");
 
-        @SuppressWarnings("deprecation")
+
         OfflinePlayer op = Bukkit.getOfflinePlayer("lusu007");
-        boolean b = BanManager.isBanned(op.getUniqueId().toString());
-        System.out.println(b);
+        BanManager.ban(op.getUniqueId().toString(), op.getName(), "Hacking", 60);
     }
 
     public void onDisable() {

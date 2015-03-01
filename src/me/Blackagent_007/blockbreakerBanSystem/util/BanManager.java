@@ -50,9 +50,7 @@ public class BanManager {
         ResultSet rs = MySQL.getResult("SELECT * FROM BannedPlayers WHERE UUID='"+uuid+"'");
         try {
             while(rs.next()) {
-                while(rs.next()) {
-                    return rs.getString("Grund");
-                }
+                return rs.getString("Grund");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -64,9 +62,7 @@ public class BanManager {
         ResultSet rs = MySQL.getResult("SELECT * FROM BannedPlayers WHERE UUID='"+uuid+"'");
         try {
             while(rs.next()) {
-                while(rs.next()) {
-                    return rs.getLong("Ende");
-                }
+                return rs.getLong("Ende");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,7 +75,7 @@ public class BanManager {
         ResultSet rs = MySQL.getResult("SELECT * FROM BannedPlayers");
         try {
             while(rs.next()) {
-                list.add(rs.getString("playername"));
+                list.add(rs.getString("Spielername"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
