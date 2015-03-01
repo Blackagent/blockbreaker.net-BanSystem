@@ -2,16 +2,17 @@ package me.Blackagent_007.blockbreakerBanSystem;
 
 /*
     Hier geht´s weiter im Video!!!!!!!!!!!!!!!!!!!!!!!!!
-        http://youtu.be/tXzfdqJ2k4Y?t=15m26s   !!
+        https://www.youtube.com/watch?v=XfmaLWE6p-I   !!
 
         ===================================
         ----- Mögliche Fehlerstellen: -----
-        Aktuell keine
+        => -
 
  */
 import me.Blackagent_007.blockbreakerBanSystem.MySQL.MySQL;
 import me.Blackagent_007.blockbreakerBanSystem.util.BanManager;
 import me.Blackagent_007.blockbreakerBanSystem.util.FileManager;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,10 +30,6 @@ public class Main extends JavaPlugin{
         MySQL.connect();
         MySQL.createTable();
         Bukkit.getConsoleSender().sendMessage(prefix + "Plugin aktiviert");
-
-
-        OfflinePlayer op = Bukkit.getOfflinePlayer("lusu007");
-        BanManager.ban(op.getUniqueId().toString(), op.getName(), "Hacking", 60);
     }
 
     public void onDisable() {
