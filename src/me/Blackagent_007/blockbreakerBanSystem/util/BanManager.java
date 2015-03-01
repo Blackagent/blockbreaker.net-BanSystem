@@ -31,7 +31,7 @@ public class BanManager {
     }
 
     public static void unban(String uuid) {
-        MySQL.update("DELETE * FROM BannedPlayers WHERE UUID='"+uuid+"'");
+        MySQL.update("DELETE FROM BannedPlayers WHERE UUID='"+uuid+"'");
     }
 
     public static boolean isBanned(String uuid) {
