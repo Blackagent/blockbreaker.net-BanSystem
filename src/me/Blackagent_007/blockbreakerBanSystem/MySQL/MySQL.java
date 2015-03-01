@@ -31,7 +31,7 @@ public class MySQL {
     }
 
     public static void close() {
-        if(!isConnected()) {
+        if(isConnected()) {
             try {
                 con.close();
                 Bukkit.getConsoleSender().sendMessage(Main.getInstance().prefix + "MySQL Verbindung geschlossen!");

@@ -27,8 +27,9 @@ public class Main extends JavaPlugin{
         Bukkit.getConsoleSender().sendMessage(prefix + "Plugin aktiviert");
 
         @SuppressWarnings("deprecation")
-        OfflinePlayer op = Bukkit.getOfflinePlayer("Blackagent_007");
-        BanManager.ban(op.getUniqueId().toString(), op.getName(), "Hacking", 60);
+        OfflinePlayer op = Bukkit.getOfflinePlayer("lusu007");
+        boolean b = BanManager.isBanned(op.getUniqueId().toString());
+        System.out.println(b);
     }
 
     public void onDisable() {
