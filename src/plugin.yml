@@ -2,3 +2,9 @@ name: blockbreakerBanSystem
 author: Blackagent_007
 version: 1.0
 main: me.Blackagent_007.blockbreakerBanSystem.Main
+
+commans:
+  ban:
+  tempban:
+  unban:
+  check:

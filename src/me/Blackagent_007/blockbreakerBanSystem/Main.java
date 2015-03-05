@@ -2,19 +2,18 @@ package me.Blackagent_007.blockbreakerBanSystem;
 
 /*
     Hier geht´s weiter im Video!!!!!!!!!!!!!!!!!!!!!!!!!
-        https://www.youtube.com/watch?v=XfmaLWE6p-I   !!
+        http://youtu.be/XfmaLWE6p-I?t=18m20s   !!
 
         ===================================
         ----- Mögliche Fehlerstellen: -----
-        => -
+        => BanCommands Zeile 15
+        => BanCommands Zeile 58 => ... = null == ???
 
  */
 import me.Blackagent_007.blockbreakerBanSystem.MySQL.MySQL;
-import me.Blackagent_007.blockbreakerBanSystem.util.BanManager;
+import me.Blackagent_007.blockbreakerBanSystem.commands.BanCommands;
 import me.Blackagent_007.blockbreakerBanSystem.util.FileManager;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin{
@@ -41,7 +40,11 @@ public class Main extends JavaPlugin{
     }
 
     private void registerCommands() {
-
+        BanCommands banCMD = new BanCommands(this);
+        getCommand("ban").setExecutor(banCMD);
+        getCommand("tempban").setExecutor(banCMD);
+        getCommand("check").setExecutor(banCMD);
+        getCommand("unban").setExecutor(banCMD);
     }
 
     public String prefix;

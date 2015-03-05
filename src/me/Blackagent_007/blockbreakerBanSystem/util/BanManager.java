@@ -10,14 +10,14 @@ import java.util.List;
 
 public class BanManager {
 
-   /*
-    *   Syntax: Spielername, UUID, Ende, Grund
-    */
-
     public static void ban(String uuid, String playername, String reason, int seconds) {
+        long end = 0;
+        if(seconds == -1) {
+            end = -1;
+        }
         long current = System.currentTimeMillis();
         long millis = seconds*1000;
-        long end = current+millis;
+        end = current + millis;
         MySQL.update("INSERT INTO BannedPlayers (Spielername, UUID, Ende, Grund) VALUES ('"+playername+"','"+uuid+"','"+end+"','"+reason+"')");
         if(Bukkit.getPlayer(playername) != null) {
             Bukkit.getPlayer(playername).kickPlayer("§cDu wurdest vom Server gebannt!\n" +
@@ -35,11 +35,14 @@ public class BanManager {
     }
 
     public static boolean isBanned(String uuid) {
-        ResultSet rs = MySQL.getResult("SELECT * FROM BannedPlayers WHERE UUID='"+uuid+"'");
+        ResultSet rs = MySQL.getResult("SELECT Ende FROM BannedPlayers WHERE UUID='"+uuid+"'");
         try {
             while(rs.next()) {
-                return rs != null;
+                if(rs.getInt("Ende") == -1) {
+                    return true;
+                }
             }
+            return rs.next();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -82,6 +85,7 @@ public class BanManager {
         }
         return list;
     }
+
 
 //    public static String getRemainingTime(String uuid) {
 //
