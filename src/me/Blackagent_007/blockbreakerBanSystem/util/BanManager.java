@@ -87,8 +87,8 @@ public class BanManager {
     }
 
 
-//    public static String getRemainingTime(String uuid) {
-//
-//    }
+    public static String getRemainingTime(String uuid) {
+        return null;
+    }
 
 }

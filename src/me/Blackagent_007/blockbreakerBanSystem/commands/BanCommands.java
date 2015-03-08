@@ -84,16 +84,38 @@ public class BanCommands implements CommandExecutor{
                     sender.sendMessage(plugin.prefix + "§cEs sind aktuell keine Spieler gebannt!");
                     return true;
                 }
+                sender.sendMessage(plugin.prefix + "§7----------§6§1Ban-Liste §7----------");
                 for(String allBanned : BanManager.getBannedPlayers()) {
                     sender.sendMessage(plugin.prefix + "§e" + allBanned + " §7(Grund: §r" + BanManager.getReason(getUUID(allBanned)) + "§7)");
                 }
                 return true;
             }
             String playername = args[0];
-
+            sender.sendMessage(plugin.prefix + "§7----------§6§1Ban-Infos §7----------");
+            sender.sendMessage(plugin.prefix + "§eName: §r" + playername);
+            sender.sendMessage(plugin.prefix + "§eGebannt: §r" + (BanManager.isBanned(getUUID(playername)) ? "§aJa!" : "§cNein!"));
+            if(BanManager.isBanned(getUUID(playername))) {
+                sender.sendMessage(plugin.prefix + "§eGrund §r" + BanManager.getReason(getUUID(playername)));
+                sender.sendMessage(plugin.prefix + "§eVerbleibende Zeit: §r" + BanManager.getRemainingTime(getUUID(playername)));
+            }
             return true;
         }
         sender.sendMessage(plugin.prefix + "§c/check (list) <Spieler>");
+        return true;
+    }
+
+    if(cmd.getName().equalsIgnoreCase("unban")) {
+        if(args.length == 1) {
+            String playername = args[0];
+            if(BanManager.isBanned(getUUID(playername))) {
+                sender.sendMessage(plugin.prefix + "§cDieser Spieler ist nicht gebannt!");
+                return true;
+            }
+            BanManager.unban(getUUID(playername));
+            sender.sendMessage(plugin.prefix + "§7Du hast §e" + playername + " §7entbannt!");
+            return true;
+        }
+        sender.sendMessage(plugin.prefix + "§c/unban <Spieler>");
         return true;
     }
     return true;
