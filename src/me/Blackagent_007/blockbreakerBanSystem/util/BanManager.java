@@ -24,7 +24,7 @@ public class BanManager {
             "\n" +
             "§3Grund: §e" + getReason(uuid) + "\n" +
             "\n" +
-//            "§3Verbleibende Zeit: §e" + getRemainingTime(uuid) + "\n"
+              "§3Verbleibende Zeit: §e" + getRemainingTime(uuid) + "\n" +
             "\n" +
             "§3 Du kannst §c§nkeinen§3 Entbannungsantrag stellen!");
         }
@@ -88,7 +88,38 @@ public class BanManager {
 
 
     public static String getRemainingTime(String uuid) {
-        return null;
+        long current = System.currentTimeMillis();
+        long end = getEnd(uuid);
+        long millis = end - current;
+
+        int seconds = 0;
+        int minutes = 0;
+        int hours = 0;
+        int days = 0;
+        int weeks = 0;
+
+        while(millis > 1000) {
+            millis -= 1000;
+            seconds ++;
+        }
+        while(seconds > 60) {
+            seconds -= 60;
+            minutes ++;
+        }
+        while (minutes > 60) {
+            minutes -= 60;
+            hours++;
+        }
+        while(hours > 24) {
+            hours -= 24;
+            days ++;
+        }
+        while(days > 7) {
+            days -= 7;
+            weeks ++;
+        }
+
+        return "§e" + weeks + "Woche(n) " + days + " Tage(e) " + hours + " Stunde(n) " + minutes + " Minute(n) " + seconds + " Sekunde(n)";
     }
 
 }

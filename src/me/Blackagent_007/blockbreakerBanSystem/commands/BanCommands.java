@@ -14,7 +14,7 @@ public class BanCommands implements CommandExecutor{
 
     private Main plugin;
 
-    public BanCommands(Main main) {
+    public BanCommands(Main plugin) {
         this.plugin = plugin;
     }
 
