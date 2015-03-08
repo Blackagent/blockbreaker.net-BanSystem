@@ -18,9 +18,7 @@ public class BanCommands implements CommandExecutor{
         this.plugin = plugin;
     }
 
-    /*
-     *   Syntax: Spielername, UUID, Ende, Grund
-     */
+
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -57,28 +55,51 @@ public class BanCommands implements CommandExecutor{
                     sender.sendMessage(plugin.prefix + "§c<Zahlenwert> muss eine Zahl sein!");
                     return true;
                 }
-                String unit = args[2];
+                String unitString = args[2];
 
                 String reason = "";
                 for(int i = 3; i < args.length; i++) {
                     reason += args[i] + " ";
                 }
                 List<String> unitList = BanUnit.getUnitsAsString();
-                if(unitList.contains(unit.toLowerCase())) {
-                    int seconds =   //HIIIIIIIIIIIIIIIIIEEEEEEEEEEEEEEEEEEEEERRRRRRRRR GEHTS WEITER
+                if(unitList.contains(unitString.toLowerCase())) {
+                    BanUnit unit = BanUnit.getUnit(unitString);
+                    int seconds = value * unit.getToSecond();
+                    BanManager.ban(getUUID(playername), playername, reason, seconds);
+                    sender.sendMessage(plugin.prefix + "§7Du hast §e" + playername + " §7für §c" + value + unit.getName() + " §7gebannt!");
                     return true;
                 }
-                sender.sendMessage(plugin.prefix + "§cDiese Einheit existiert nich!");
+                sender.sendMessage(plugin.prefix + "§cDiese <Einheit> existiert nich!");
                 return true;
             }
             sender.sendMessage(plugin.prefix + "§c/tempban <Spieler> <Zahlenwert> <Einheit> <Grund>");
             return true;
         }
 
+    if(cmd.getName().equalsIgnoreCase("check")) {
+        if(args.length == 1) {
+            if(args [0].equalsIgnoreCase("list")) {
+                List<String> list = BanManager.getBannedPlayers();
+                if(list.size() == 0) {
+                    sender.sendMessage(plugin.prefix + "§cEs sind aktuell keine Spieler gebannt!");
+                    return true;
+                }
+                for(String allBanned : BanManager.getBannedPlayers()) {
+                    sender.sendMessage(plugin.prefix + "§e" + allBanned + " §7(Grund: §r" + BanManager.getReason(getUUID(allBanned)) + "§7)");
+                }
+                return true;
+            }
+            String playername = args[0];
 
+            return true;
+        }
+        sender.sendMessage(plugin.prefix + "§c/check (list) <Spieler>");
+        return true;
+    }
     return true;
     }
 
+    @SuppressWarnings("deprecation")
     private String getUUID(String playername) {
         return Bukkit.getOfflinePlayer(playername).getUniqueId().toString();
     }

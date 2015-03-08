@@ -43,4 +43,13 @@ public enum BanUnit {
         }
         return units;
     }
+
+    public static BanUnit getUnit(String unit) {
+        for(BanUnit units : BanUnit.values()) {
+            if(units.getShortcut().toLowerCase().equals(unit.toLowerCase())) {
+                return units;
+            }
+        }
+        return null;
+    }
 }
