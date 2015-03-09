@@ -6,7 +6,6 @@ package me.Blackagent_007.blockbreakerBanSystem;
 
         ===================================
         ----- Mögliche Fehlerstellen: -----
-        => BanCommands Zeile 15
         => BanCommands Zeile 58 => ... = null == ???
         => Ban Commands Ban Methode + Zeile 17 Main plugin | Main main
 

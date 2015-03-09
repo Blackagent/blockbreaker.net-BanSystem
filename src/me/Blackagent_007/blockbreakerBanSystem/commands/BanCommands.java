@@ -28,6 +28,7 @@ public class BanCommands implements CommandExecutor{
                 String playername = args[0];
                 if (BanManager.isBanned(getUUID(playername))) {
                     sender.sendMessage(plugin.prefix + "§cDieser Spieler ist bereits gebannt!");
+                    return true;
                 }
                 String reason = "";
                 for(int i = 1; i < args.length; i++) {
@@ -47,6 +48,7 @@ public class BanCommands implements CommandExecutor{
                 String playername = args[0];
                 if (BanManager.isBanned(getUUID(playername))) {
                     sender.sendMessage(plugin.prefix + "§cDieser Spieler ist bereits gebannt!");
+                    return true;
                 }
                 int value;
                 try {
