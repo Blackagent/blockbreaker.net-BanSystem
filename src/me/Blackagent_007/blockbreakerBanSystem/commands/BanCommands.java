@@ -35,7 +35,7 @@ public class BanCommands implements CommandExecutor{
                     reason += args[i] + " ";
                 }
                 BanManager.ban(getUUID(playername), playername, reason, -1);
-                sender.sendMessage(plugin.prefix + "§Du hast §e" + playername + " §4PERMANENT §7gebannt!");
+                sender.sendMessage(plugin.prefix + "§4Du hast §e" + playername + " §4PERMANENT §7gebannt!");
                 return true;
             }
             sender.sendMessage(plugin.prefix + "§c/ban <Spieler> <Grund>");
@@ -109,7 +109,7 @@ public class BanCommands implements CommandExecutor{
     if(cmd.getName().equalsIgnoreCase("unban")) {
         if(args.length == 1) {
             String playername = args[0];
-            if(BanManager.isBanned(getUUID(playername))) {
+            if(!BanManager.isBanned(getUUID(playername))) {
                 sender.sendMessage(plugin.prefix + "§cDieser Spieler ist nicht gebannt!");
                 return true;
             }

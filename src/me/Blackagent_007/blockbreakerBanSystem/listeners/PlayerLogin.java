@@ -22,7 +22,7 @@ public class PlayerLogin implements Listener{
         if(BanManager.isBanned(p.getUniqueId().toString())) {
             long current = System.currentTimeMillis();
             long end = BanManager.getEnd(p.getUniqueId().toString());
-            if(current < end) {
+            if(current < end | end == -1) {
                 e.disallow(PlayerLoginEvent.Result.KICK_BANNED, "§cDu wurdest vom Server gebannt!\n" +
                         "\n" +
                         "§3Grund: §e" + BanManager.getReason(p.getUniqueId().toString()) + "\n" +

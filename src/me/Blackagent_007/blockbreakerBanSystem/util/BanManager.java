@@ -14,10 +14,11 @@ public class BanManager {
         long end = 0;
         if(seconds == -1) {
             end = -1;
+        } else {
+            long current = System.currentTimeMillis();
+            long millis = seconds*1000;
+            end = current + millis;
         }
-        long current = System.currentTimeMillis();
-        long millis = seconds*1000;
-        end = current + millis;
         MySQL.update("INSERT INTO BannedPlayers (Spielername, UUID, Ende, Grund) VALUES ('"+playername+"','"+uuid+"','"+end+"','"+reason+"')");
         if(Bukkit.getPlayer(playername) != null) {
             Bukkit.getPlayer(playername).kickPlayer("§cDu wurdest vom Server gebannt!\n" +
@@ -85,6 +86,9 @@ public class BanManager {
     public static String getRemainingTime(String uuid) {
         long current = System.currentTimeMillis();
         long end = getEnd(uuid);
+        if(end == -1) {
+            return "§4PERMANENT";
+        }
         long millis = end - current;
 
         int seconds = 0;

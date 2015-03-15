@@ -3,7 +3,7 @@ author: Blackagent_007
 version: 1.0
 main: me.Blackagent_007.blockbreakerBanSystem.Main
 
-commans:
+commands:
   ban:
   tempban:
   unban:
