@@ -43,7 +43,7 @@ public class FileManager {
 
     public static void readConfig() {
         FileConfiguration cfg = getConfigFileConfiguration();
-        Main.getInstance().prefix = ChatColor.translateAlternateColorCodes('&', cfg.getString("prefix")) + "§r";
+        Main.getInstance().prefix = ChatColor.translateAlternateColorCodes('&', cfg.getString("prefix") + " ") + "§r";
     }
 
     public static void setStandardMySQL() {

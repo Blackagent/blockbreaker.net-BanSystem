@@ -3,7 +3,6 @@
     <output-path>$PROJECT_DIR$/out/artifacts/blockbreaker_net_BanSystem_jar</output-path>
     <root id="archive" name="blockbreaker.net-BanSystem.jar">
       <element id="module-output" name="blockbreaker.net-BanSystem" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../spigot1657.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

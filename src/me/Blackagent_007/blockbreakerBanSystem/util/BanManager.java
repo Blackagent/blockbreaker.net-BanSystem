@@ -90,35 +90,89 @@ public class BanManager {
             return "§4PERMANENT";
         }
         long millis = end - current;
+        long days;
+        long hours;
+        long minutes;
+        long seconds;
 
-        long seconds = 0;
-        long minutes = 0;
-        long hours = 0;
-        long days = 0;
-        long weeks = 0;
 
-        while(millis > 1000) {
-            millis -= 1000;
-            seconds ++;
-        }
-        while(seconds > 60) {
-            seconds -= 60;
-            minutes ++;
-        }
-        while (minutes > 60) {
-            minutes -= 60;
-            hours++;
-        }
-        while(hours > 24) {
-            hours -= 24;
-            days ++;
-        }
-        while(days > 7) {
-            days -= 7;
-            weeks ++;
+        long weeks = (long) Math.floor(millis/1000/60/60/24/7);
+
+
+        if(weeks < 1) {
+            days = (long) Math.floor(millis/1000/60/60/24);
+        } else {
+            millis = millis - weeks*7*24*60*60*1000;
+            days = (long) Math.floor(millis/1000/60/60/24);
         }
 
-        return "§e" + weeks + "Woche(n) " + days + " Tage(e) " + hours + " Stunde(n) " + minutes + " Minute(n) " + seconds + " Sekunde(n)";
+
+        if(days < 1) {
+            hours = (long) Math.floor(millis/1000/60/60);
+        } else {
+            millis = millis - days*24*60*60*1000;
+            hours = (long) Math.floor(millis/1000/60/60);
+        }
+
+
+        if(hours < 1) {
+            minutes = (long) Math.floor(millis/1000/60);
+        } else {
+            millis = millis - hours*60*60*1000;
+            minutes = (long) Math.floor(millis/1000/60);
+        }
+
+
+        if(minutes < 1) {
+            seconds = (long) Math.floor(millis/1000);
+        } else {
+            millis = millis - minutes*60*1000;
+            seconds = (long) Math.floor(millis/1000);
+        }
+
+        String Wochen = weeks + " Wochen ";
+        String Tage = days + " Tage ";
+        String Stunden = hours + " Stunden ";
+        String Minuten = minutes + " Minuten ";
+        String Sekunden = seconds + " Sekunden ";
+
+
+        if(weeks == 1) {
+            Wochen = " " + weeks + " Woche ";
+        }
+        if(days == 1) {
+            Tage = " " + days + " Tag ";
+        }
+        if(hours == 1) {
+            Stunden = " " + hours + " Stunde ";
+        }
+        if(minutes == 1) {
+            Minuten = " " + minutes + " Minute ";
+        }
+        if(seconds == 1) {
+            Sekunden = " " + seconds + " Sekunde ";
+        }
+
+
+
+        if(weeks == 0) {
+            Wochen = "";
+        }
+        if(days == 0) {
+            Tage = "";
+        }
+        if(hours == 0) {
+            Stunden = "";
+        }
+        if(minutes == 0) {
+            Minuten = "";
+        }
+        if(seconds == 0) {
+            Sekunden = "";
+        }
+
+
+        return "§c"+ Wochen + Tage + Stunden + Minuten + Sekunden;
     }
 
 }

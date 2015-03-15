@@ -73,7 +73,7 @@ public class BanCommands implements CommandExecutor{
                     BanUnit unit = BanUnit.getUnit(unitString);
                     long seconds = value * unit.getToSecond();
                     BanManager.ban(getUUID(playername), playername, reason, seconds);
-                    sender.sendMessage(plugin.prefix + "§7Du hast §e" + playername + " §7für §c" + value + unit.getName() + " §7gebannt!");
+                    sender.sendMessage(plugin.prefix + "§7Du hast §e" + playername + " §7für §c" + value + " " + unit.getName() + " §7gebannt!");
                     return true;
                 }
                 sender.sendMessage(plugin.prefix + "§cDiese <Einheit> existiert nich!");
@@ -100,9 +100,9 @@ public class BanCommands implements CommandExecutor{
             String playername = args[0];
             sender.sendMessage(plugin.prefix + "§7----------§6§1Ban-Infos §7----------");
             sender.sendMessage(plugin.prefix + "§eName: §r" + playername);
-            sender.sendMessage(plugin.prefix + "§eGebannt: §r" + (BanManager.isBanned(getUUID(playername)) ? "§aJa!" : "§cNein!"));
+            sender.sendMessage(plugin.prefix + "§eGebannt: §r" + (BanManager.isBanned(getUUID(playername)) ? "§cJa!" : "§aNein!"));
             if(BanManager.isBanned(getUUID(playername))) {
-                sender.sendMessage(plugin.prefix + "§eGrund §r" + BanManager.getReason(getUUID(playername)));
+                sender.sendMessage(plugin.prefix + "§eGrund: §r" + BanManager.getReason(getUUID(playername)));
                 sender.sendMessage(plugin.prefix + "§eVerbleibende Zeit: §r" + BanManager.getRemainingTime(getUUID(playername)));
             }
             return true;
