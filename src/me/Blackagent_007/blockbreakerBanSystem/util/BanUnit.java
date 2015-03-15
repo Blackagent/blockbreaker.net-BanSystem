@@ -15,16 +15,16 @@ public enum BanUnit {
     WEEK("Woche(n)", 7*24*60*60, "week");
 
     private String name;
-    private int toSecond;
+    private long toSecond;
     private String shortcut;
 
-    private BanUnit(String name, int toSecond, String shortcut) {
+    private BanUnit(String name, long toSecond, String shortcut) {
         this.name = name;
         this.toSecond = toSecond;
         this.shortcut = shortcut;
     }
 
-    public int getToSecond() {
+    public long getToSecond() {
         return toSecond;
     }
 

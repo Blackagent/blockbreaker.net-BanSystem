@@ -10,7 +10,7 @@ import java.util.List;
 
 public class BanManager {
 
-    public static void ban(String uuid, String playername, String reason, int seconds) {
+    public static void ban(String uuid, String playername, String reason, long seconds) {
         long end = 0;
         if(seconds == -1) {
             end = -1;
@@ -91,11 +91,11 @@ public class BanManager {
         }
         long millis = end - current;
 
-        int seconds = 0;
-        int minutes = 0;
-        int hours = 0;
-        int days = 0;
-        int weeks = 0;
+        long seconds = 0;
+        long minutes = 0;
+        long hours = 0;
+        long days = 0;
+        long weeks = 0;
 
         while(millis > 1000) {
             millis -= 1000;

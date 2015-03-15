@@ -50,13 +50,18 @@ public class BanCommands implements CommandExecutor{
                     sender.sendMessage(plugin.prefix + "§cDieser Spieler ist bereits gebannt!");
                     return true;
                 }
-                int value;
+                long value;
                 try {
                     value = Integer.valueOf(args[1]);
                 } catch(NumberFormatException e) {
                     sender.sendMessage(plugin.prefix + "§c<Zahlenwert> muss eine Zahl sein!");
                     return true;
                 }
+                if(value >= 500) {
+                    sender.sendMessage(plugin.prefix + "§cDie Zahl muss unter 500 liegen!");
+                    return true;
+                }
+
                 String unitString = args[2];
 
                 String reason = "";
@@ -66,7 +71,7 @@ public class BanCommands implements CommandExecutor{
                 List<String> unitList = BanUnit.getUnitsAsString();
                 if(unitList.contains(unitString.toLowerCase())) {
                     BanUnit unit = BanUnit.getUnit(unitString);
-                    int seconds = value * unit.getToSecond();
+                    long seconds = value * unit.getToSecond();
                     BanManager.ban(getUUID(playername), playername, reason, seconds);
                     sender.sendMessage(plugin.prefix + "§7Du hast §e" + playername + " §7für §c" + value + unit.getName() + " §7gebannt!");
                     return true;
