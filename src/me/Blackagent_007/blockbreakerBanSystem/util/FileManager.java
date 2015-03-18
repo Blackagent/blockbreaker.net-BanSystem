@@ -3,7 +3,7 @@ package me.Blackagent_007.blockbreakerBanSystem.util;
 
 import me.Blackagent_007.blockbreakerBanSystem.Main;
 import me.Blackagent_007.blockbreakerBanSystem.MySQL.MySQL;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 

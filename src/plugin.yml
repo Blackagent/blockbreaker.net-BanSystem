@@ -5,6 +5,25 @@ main: me.Blackagent_007.blockbreakerBanSystem.Main
 
 commands:
   ban:
+    description: Befehl für einen perma-ban
+    usage: /ban <Spielername> <Grund>
   tempban:
+    description: Befehl um einen Spieler auf Zeit zu bannen
+    usage: /tempban <Spielername> <Zahlenwert> <sec min hour day week> <Grund>
   unban:
+    description: Befehl um einen gebannten Spieler zu entbannen
+    usage: /unban <Spielername>
   check:
+    description: Befehl um den BanStatus eines Spielers zu checken bzw alle gebannten Spieler aufzulisten
+    usage: /check <Spielername/list>
+
+
+permissions:
+  server.ban.ban:
+    default: false
+  server.ban.unban:
+    default: false
+  server.ban.tempban:
+    default: false
+  server.ban.check:
+    default: false

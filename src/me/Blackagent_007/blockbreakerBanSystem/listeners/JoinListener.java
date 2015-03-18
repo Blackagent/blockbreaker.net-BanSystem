@@ -1,7 +1,5 @@
 package me.Blackagent_007.blockbreakerBanSystem.listeners;
 
-
-import me.Blackagent_007.blockbreakerBanSystem.Main;
 import me.Blackagent_007.blockbreakerBanSystem.util.BanManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

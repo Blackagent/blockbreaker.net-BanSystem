@@ -9,7 +9,7 @@ import me.Blackagent_007.blockbreakerBanSystem.util.FileManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Main extends JavaPlugin{
+public class Main extends JavaPlugin {
 
     public void onEnable() {
         instance = this;
@@ -47,4 +47,5 @@ public class Main extends JavaPlugin{
     public static Main getInstance() {
         return instance;
     }
+
 }
