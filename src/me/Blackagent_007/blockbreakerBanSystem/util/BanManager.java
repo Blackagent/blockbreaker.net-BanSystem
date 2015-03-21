@@ -3,6 +3,8 @@ package me.Blackagent_007.blockbreakerBanSystem.util;
 import me.Blackagent_007.blockbreakerBanSystem.MySQL.MySQL;
 import org.bukkit.Bukkit;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,6 +30,8 @@ public class BanManager {
               "§3Verbleibende Zeit: §e" + getRemainingTime(uuid) + "\n" +
             "\n" +
             "§3 Du kannst §c§nkeinen§3 Entbannungsantrag stellen!");
+        } else {
+            kickPlayerGlobal(playername, reason);
         }
     }
 
@@ -173,6 +177,19 @@ public class BanManager {
 
 
         return "§c"+ Wochen + Tage + Stunden + Minuten + Sekunden;
+    }
+
+    public static void kickPlayerGlobal(String playername, String reason) {
+
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream(b);
+
+        try {
+            out.writeUTF("KickPlayer");
+            out.writeUTF(playername);
+            out.writeUTF(reason);
+        } catch(Exception ex) {
+        }
     }
 
 }

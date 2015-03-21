@@ -22,6 +22,8 @@ public class Main extends JavaPlugin {
         MySQL.connect();
         MySQL.createTable();
         Bukkit.getConsoleSender().sendMessage(prefix + "Plugin aktiviert");
+
+        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }
 
     public void onDisable() {
