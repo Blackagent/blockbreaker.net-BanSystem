@@ -21,7 +21,7 @@ public class BanManager {
             long millis = seconds*1000;
             end = current + millis;
         }
-        MySQL.update("INSERT INTO BannedPlayers (Spielername, UUID, Ende, Grund) VALUES ('"+playername+"','"+uuid+"','"+end+"','"+reason+"')");
+        MySQL.update("INSERT INTO ban (Spielername, uuid, end, reason) VALUES ('"+playername+"','"+uuid+"','"+end+"','"+reason+"')");
         if(Bukkit.getPlayer(playername) != null) {
             Bukkit.getPlayer(playername).kickPlayer("§cDu wurdest vom Server gebannt!\n" +
             "\n" +
@@ -36,11 +36,11 @@ public class BanManager {
     }
 
     public static void unban(String uuid) {
-        MySQL.update("DELETE FROM BannedPlayers WHERE UUID='"+uuid+"'");
+        MySQL.update("DELETE FROM ban WHERE uuid='"+uuid+"'");
     }
 
     public static boolean isBanned(String uuid) {
-        ResultSet rs = MySQL.getResult("SELECT Ende FROM BannedPlayers WHERE UUID='"+uuid+"'");
+        ResultSet rs = MySQL.getResult("SELECT end FROM ban WHERE uuid='"+uuid+"'");
         try {
             return rs.next();
         } catch (SQLException e) {
@@ -50,10 +50,10 @@ public class BanManager {
     }
 
     public static String getReason(String uuid) {
-        ResultSet rs = MySQL.getResult("SELECT * FROM BannedPlayers WHERE UUID='"+uuid+"'");
+        ResultSet rs = MySQL.getResult("SELECT * FROM ban WHERE uuid='"+uuid+"'");
         try {
             while(rs.next()) {
-                return rs.getString("Grund");
+                return rs.getString("reason");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,10 +62,10 @@ public class BanManager {
     }
 
     public static Long getEnd(String uuid) {
-        ResultSet rs = MySQL.getResult("SELECT * FROM BannedPlayers WHERE UUID='"+uuid+"'");
+        ResultSet rs = MySQL.getResult("SELECT * FROM ban WHERE uuid='"+uuid+"'");
         try {
             while(rs.next()) {
-                return rs.getLong("Ende");
+                return rs.getLong("end");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,7 +75,7 @@ public class BanManager {
 
     public static List<String> getBannedPlayers() {
         List<String> list = new ArrayList<String>();
-        ResultSet rs = MySQL.getResult("SELECT * FROM BannedPlayers");
+        ResultSet rs = MySQL.getResult("SELECT * FROM ban");
         try {
             while(rs.next()) {
                 list.add(rs.getString("Spielername"));
