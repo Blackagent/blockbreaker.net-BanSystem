@@ -32,6 +32,7 @@ public class BanCommands implements CommandExecutor{
                     }
                     String reason = "Admin Ban";
                     if(args.length >= 2) {
+                        reason = "";
                         for (int i = 1; i < args.length; i++) {
                             reason += args[i] + " ";
                         }
@@ -66,6 +67,7 @@ public class BanCommands implements CommandExecutor{
 
                     String reason = "Admin Temp-Ban";
                     if(args.length >= 4) {
+                        reason = "";
                         for (int i = 3; i < args.length; i++) {
                             reason += args[i] + " ";
                         }
@@ -74,7 +76,7 @@ public class BanCommands implements CommandExecutor{
                     if (unitList.contains(unitString.toLowerCase())) {
                         BanUnit unit = BanUnit.getUnit(unitString);
                         long seconds = value * unit.getToSecond();
-                        BanManager.ban(getUUID(playername), playername, reason, seconds);
+                        BanManager.ban(getUUID(playername), playername, reason, seconds + 1);
                         sender.sendMessage(plugin.prefix + "§7Du hast §e" + playername + " §7für §c" + value + " " + unit.getName() + " §7gebannt!");
                         return true;
                     }

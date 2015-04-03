@@ -1,5 +1,6 @@
 package me.Blackagent_007.blockbreakerBanSystem.util;
 
+import me.Blackagent_007.blockbreakerBanSystem.Main;
 import me.Blackagent_007.blockbreakerBanSystem.MySQL.MySQL;
 import org.bukkit.Bukkit;
 
@@ -21,7 +22,7 @@ public class BanManager {
             long millis = seconds*1000;
             end = current + millis;
         }
-        MySQL.update("INSERT INTO BannedPlayers (Spielername, UUID, Ende, Grund) VALUES ('"+playername+"','"+uuid+"','"+end+"','"+reason+"')");
+        MySQL.update("INSERT INTO ban (name, uuid, end, reason) VALUES ('"+playername+"','"+uuid+"','"+end+"','"+reason+"')");
         if(Bukkit.getPlayer(playername) != null) {
             Bukkit.getPlayer(playername).kickPlayer("§cDu wurdest vom Server gebannt!\n" +
             "\n" +
@@ -31,16 +32,22 @@ public class BanManager {
             "\n" +
             "§3 Du kannst §c§nkeinen§3 Entbannungsantrag stellen!");
         } else {
-            kickPlayerGlobal(playername, reason);
+            kickPlayerGlobal(playername, "§cDu wurdest vom Server gebannt!\n" +
+                    "\n" +
+                    "§3Grund: §e" + getReason(uuid) + "\n" +
+                    "\n" +
+                    "§3Verbleibende Zeit: §e" + getRemainingTime(uuid) + "\n" +
+                    "\n" +
+                    "§3 Du kannst §c§nkeinen§3 Entbannungsantrag stellen!");
         }
     }
 
     public static void unban(String uuid) {
-        MySQL.update("DELETE FROM BannedPlayers WHERE UUID='"+uuid+"'");
+        MySQL.update("DELETE FROM ban WHERE uuid='"+uuid+"'");
     }
 
     public static boolean isBanned(String uuid) {
-        ResultSet rs = MySQL.getResult("SELECT Ende FROM BannedPlayers WHERE UUID='"+uuid+"'");
+        ResultSet rs = MySQL.getResult("SELECT end FROM ban WHERE uuid='"+uuid+"'");
         try {
             return rs.next();
         } catch (SQLException e) {
@@ -50,7 +57,7 @@ public class BanManager {
     }
 
     public static String getReason(String uuid) {
-        ResultSet rs = MySQL.getResult("SELECT * FROM BannedPlayers WHERE UUID='"+uuid+"'");
+        ResultSet rs = MySQL.getResult("SELECT * FROM ban WHERE uuid='"+uuid+"'");
         try {
             while(rs.next()) {
                 return rs.getString("reason");
@@ -62,7 +69,7 @@ public class BanManager {
     }
 
     public static Long getEnd(String uuid) {
-        ResultSet rs = MySQL.getResult("SELECT * FROM BannedPlayers WHERE UUID='"+uuid+"'");
+        ResultSet rs = MySQL.getResult("SELECT * FROM ban WHERE uuid='"+uuid+"'");
         try {
             while(rs.next()) {
                 return rs.getLong("end");
@@ -75,10 +82,10 @@ public class BanManager {
 
     public static List<String> getBannedPlayers() {
         List<String> list = new ArrayList<String>();
-        ResultSet rs = MySQL.getResult("SELECT * FROM BannedPlayers");
+        ResultSet rs = MySQL.getResult("SELECT * FROM ban");
         try {
             while(rs.next()) {
-                list.add(rs.getString("Spielername"));
+                list.add(rs.getString("player"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -188,6 +195,8 @@ public class BanManager {
             out.writeUTF("KickPlayer");
             out.writeUTF(playername);
             out.writeUTF(reason);
+
+            Bukkit.getServer().sendPluginMessage(Main.getInstance(), "BungeeCord", b.toByteArray());
         } catch(Exception ex) {
         }
     }

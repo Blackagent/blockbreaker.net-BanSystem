@@ -49,7 +49,7 @@ public class MySQL {
     public static void createTable() {
         if(isConnected()) {
             try {
-                con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS BannedPlayers (Spielername VARCHAR(100), UUID VARCHAR(100), Ende VARCHAR(100), Grund VARCHAR(100))");
+                con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS ban (name VARCHAR(100), uuid VARCHAR(100), end VARCHAR(100), reason VARCHAR(100))");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
